@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS service(
    last_name VARCHAR(20),
    position VARCHAR(20)
 );
+
 ----------------------------------------------------------------------------------------
 ### INSERT INTO TABLE
 INSERT INTO guest(first_name, last_name, phone) VALUES
@@ -132,6 +133,7 @@ insert into employee(first_name, last_name, position) VALUES
 ('Евгений','Лексусович','Уборщик'),
 ('Алексей', 'Гасанов', 'Сантехник'),
 ('Эльнура','Гасанова','Владелец');
+
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
 ### SELECT
@@ -146,6 +148,7 @@ SELECT room.room_id, reservation.reservation_id,  reservation.check_out_date
 from reservation, room
 where room.room_id = reservation.room_id AND room.room_type = 'Двуместный' AND reservation.check_out_date < '2024-12-21'
 order by room.room_id;
+
 ----------------------------------------------------------------------------------------
 #### 2.1 Написать Ф.И. гостей, у которых номер дороже 2к
 SELECT room.room_type, guest.last_name, guest.first_name, reservation.room_id, room.price
@@ -162,6 +165,7 @@ left JOIN guest on reservation.guest_id = guest.guest_id
 WHERE room.price > 2000
 GROUP BY room.room_id
 ORDER BY room.room_type, guest.last_name;
+
 ----------------------------------------------------------------------------------------
 #### 3.1 Подзапросы и ключевое слово with
 у оли лем есть номер в отеле а еще она заказала себе уборку в своем номере,
