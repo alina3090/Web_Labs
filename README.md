@@ -214,7 +214,13 @@ WHERE first_name = 'Оля' AND last_name = 'Лем' AND guest.guest_id = reserv
 ![](/IMG/4del1.png)
 - удаление пользователя через постман
 ![на неверные данные](/IMG/4del2.png)
+
+--------------------------------
+
 ![на верные данные](/IMG/4del3.png)
+
+--------------------------------
+
 ![на верные данные](/IMG/4del4.png)
 - результат на http://127.0.0.1:8000/docs#/default/add_users_add_post
 ![](/IMG/4del5.png)
