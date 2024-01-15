@@ -15,6 +15,9 @@
 
 Таблица EMPLOYEE представляет информацию о сотрудниках гостиницы. Она содержит следующие атрибуты: (employee_id, first_name, last_name и position). Employee_id является уникальным идентификатором каждого сотрудника, first_name и last_name указывают на имена сотрудников, а position описывает их должность в гостинице.
 
+
+![https://ru.wikihow.com/перестать-ругаться-матом ](/IMG/lab2(1).png)
+
 ----------------------------------------------------------------------------------------
 ## ER-диаграмма
 ![https://ru.wikihow.com/перестать-ругаться-матом ](/IMG/lab2.png)
@@ -179,3 +182,5 @@ SELECT room.room_type as 'Тип',
        room.price*(julianday(reservation.check_out_date) - julianday(reservation.check_in_date)) as 'Итог'
 FROM guest, room, reservation
 WHERE first_name = 'Оля' AND last_name = 'Лем' AND guest.guest_id = reservation.guest_id AND reservation.room_id = room.room_id;
+
+
