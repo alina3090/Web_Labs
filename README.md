@@ -196,45 +196,67 @@ WHERE first_name = 'Оля' AND last_name = 'Лем' AND guest.guest_id = reserv
 
 1. получение всех пользователей - POST /user
 - метод
+ 
 ![](/IMG/4get.png)
+
 - результат на http://127.0.0.1:8000/docs#/default/add_users_add_post
+  
 ![](/IMG/4get2.png)
 
 2. добавление пользователя - POST /user
 - метод
+  
 ![](/IMG/4add1.png)
+
 - добавление пользователя через постман
+  
 ![](/IMG/4add2.png)
+
 - результат на http://127.0.0.1:8000/docs#/default/add_users_add_post
+  
 ![](/IMG/4add3.png)
 
 3. удаление пользователя - POST /user
 
 - метод
+  
 ![](/IMG/4del1.png)
+
 - удаление пользователя через постман
   (неверные данные):
+  
 ![на неверные данные](/IMG/4del2.png)
 
 --------------------------------
 
 (неверные данные):
+
 ![на верные данные](/IMG/4del3.png)
 
 --------------------------------
 
   (верные данные):
+  
 ![ верные данные](/IMG/4del4.png)
+
 - результат на http://127.0.0.1:8000/docs#/default/add_users_add_post
+  
 ![](/IMG/4del5.png)
 
 3. изменение данных пользователя - POST /user
 
 - метод
+  
 ![](/IMG/4put1.png)
+
 - изменение данных пользователя через постман
+  
 ![на неверные данные](/IMG/4put2.png)
+
 меняем Liza Cute girl на Liza NOT Cute girl
+
 ![верные данные](/IMG/4put3.png)
+
 - результат на http://127.0.0.1:8000/docs#/default/add_users_add_post
+  
 ![](/IMG/4put4.png)
