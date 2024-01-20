@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from Database.database import *
 from Database.schemas import *
 from Models.model import *
+from authorization import KeycloakJWTBearerHandler, HTTPException
 
 import json
 
@@ -17,6 +18,12 @@ Base.metadata.create_all(bind=engine)
 admin_router2 = APIRouter(
     tags=["Administrator2"]
 )
+
+
+def verify_admin(role) -> bool:
+    if role == "admin":
+        return True
+    return False
 
 
 def get_db():
@@ -30,7 +37,9 @@ def get_db():
 # -------------------------------------------- Get запросы --------------------------------------------
 
 @admin_router2.get("/employee")
-def get_employee(db: Session = Depends(get_db)):
+def get_employee(db: Session = Depends(get_db), role=Depends(KeycloakJWTBearerHandler())):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     employees = db.query(EMPLOYEE).all()
 
     data = dict()
@@ -47,7 +56,9 @@ def get_employee(db: Session = Depends(get_db)):
 
 
 @admin_router2.get("/service")
-def get_service(db: Session = Depends(get_db)):
+def get_service(db: Session = Depends(get_db), role=Depends(KeycloakJWTBearerHandler())):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     service = db.query(SERVICE).all()
 
     data = dict()
@@ -66,8 +77,11 @@ def get_service(db: Session = Depends(get_db)):
 @admin_router2.post("/employee")
 def add_employee(
         employee_data: EmployeeModel,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        role=Depends(KeycloakJWTBearerHandler())
 ):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     # Добавить проверки
     if employee_data.first_name == '' or employee_data.last_name == '' or employee_data.position == '':
         return {"Сообщение": "Данные не введены"}
@@ -85,8 +99,11 @@ def add_employee(
 @admin_router2.post("/service")
 def get_service(
         service_data: ServiceModel,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        role=Depends(KeycloakJWTBearerHandler())
 ):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     # Добавить проверки
     if service_data.service_name == '' or service_data.price == '':
         return {"Сообщение": "Данные не введены"}
@@ -105,8 +122,11 @@ def get_service(
 def change_employee_data(
         employee_data: EmployeeModel,
         new_employee_data: EmployeeModel,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        role=Depends(KeycloakJWTBearerHandler())
 ):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     # Добавить проверки employee_data
 
     employee = db.query(EMPLOYEE) \
@@ -131,8 +151,11 @@ def change_employee_data(
 def change_guest_data(
         service_data: ServiceModel,
         new_service_data: ServiceModel,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        role=Depends(KeycloakJWTBearerHandler())
 ):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     # Добавить проверки employee_data
 
     service = db.query(SERVICE) \
@@ -159,8 +182,11 @@ def change_guest_data(
 @admin_router2.delete("/employee")
 def delete_employee(
         employee_data: EmployeeModel,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        role=Depends(KeycloakJWTBearerHandler())
 ):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     employee = db.query(EMPLOYEE) \
         .filter(EMPLOYEE.employee_id == employee_data.id) \
         .first()
@@ -176,8 +202,11 @@ def delete_employee(
 @admin_router2.delete("/service")
 def delete_service(
         service_data: ServiceModel,
-        db: Session = Depends(get_db)
+        db: Session = Depends(get_db),
+        role=Depends(KeycloakJWTBearerHandler())
 ):
+    if not verify_admin(role):
+        raise HTTPException(status_code=403, detail={"message": "Denied permission"})
     # Добавить проверки employee_data
     # тут если не ввести id
     if service_data.service_name == '' or service_data.price == None:
