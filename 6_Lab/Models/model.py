@@ -11,8 +11,8 @@ class EmployeeModel(BaseModel):
 class RoomModel(BaseModel):
     id: int
     room_type: str
-    price: str
-    availability: str
+    price: int
+    availability: bool
 
 
 class ReservationModel(BaseModel):
@@ -31,6 +31,6 @@ class GuestModel(BaseModel):
 
 
 class ServiceModel(BaseModel):
-    id: int
+    # id: int
     service_name: str
-    price: str
+    price: int

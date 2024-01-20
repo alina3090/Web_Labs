@@ -35,8 +35,8 @@ class ROOM(Base):
         autoincrement=True
     )
     room_type = Column(String(50))
-    price = Integer
-    availability = Boolean
+    price = Column(Integer)
+    availability = Column(Boolean)
 
 
 class RESERVATION(Base):
@@ -49,8 +49,8 @@ class RESERVATION(Base):
     )
     guest_id = Column(ForeignKey(GUEST.guest_id))
     room_id = Column(ForeignKey(ROOM.room_id))
-    check_in_date = Column(DateTime, default=datetime.now())
-    check_out_date = Column(DateTime, default=datetime.now())
+    check_in_date = Column(DateTime)
+    check_out_date = Column(DateTime)
 
 
 class SERVICE(Base):
